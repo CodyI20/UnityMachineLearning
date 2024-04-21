@@ -26,7 +26,7 @@ public class GenerationComponent<T> where T : AgentLogic
     /// Newly create agents will be Awaken (calling AwakeUp()).
     /// </summary>
     /// <param name="parents"></param>
-    public void GenerateObjects()
+    public void GenerateObjects(T[] parents = null)
     {
         activeAgents = new List<T>();
         var objects = generator.RegenerateObjects();
@@ -54,7 +54,6 @@ public class GenerationComponent<T> where T : AgentLogic
         }
 
         parents = new T[parentSize];
-        parentSize++;
         for (var i = 0; i < parentSize; i++)
         {
             parents[i] = activeAgents[i];
@@ -64,6 +63,8 @@ public class GenerationComponent<T> where T : AgentLogic
         lastWinner.name += "Gen-" + GenerationManager.Instance.GenerationCount;
         lastWinnerData = lastWinner.GetData();
         PrefabUtility.SaveAsPrefabAsset(lastWinner.gameObject, GenerationManager.Instance.SavePrefabsAt + lastWinner.name + ".prefab");
+
+        GenerateObjects(parents);
     }
     public void CleanUpNullItems()
     {
