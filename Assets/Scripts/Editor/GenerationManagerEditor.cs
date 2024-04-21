@@ -17,7 +17,7 @@ namespace Editor
             {
                 (target as GenerationManager)?.GenerateBoxes();
             }
-            if (GUILayout.Button("Generate Boats/Pirates"))
+            if (GUILayout.Button("Generate AgentLogicComponents"))
             {
                 (target as GenerationManager)?.GenerateObjects();
             }
