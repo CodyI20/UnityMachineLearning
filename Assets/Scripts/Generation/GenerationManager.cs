@@ -33,18 +33,12 @@ public class GenerationManager : Singleton<GenerationManager>
     [SerializeField, Tooltip("Seed for the Random Generator.")]
     private int randomGenSeed = 6;
 
-    [Space(10)]
-    [Header("Prefab Saving")]
-    [SerializeField]
-    private string savePrefabsAt;
-
     private bool _runningSimulation;
 
     //Public getters
     public float MutationChance => mutationChance;
     public float MutationFactor => mutationFactor;
     public int GenerationCount => generationCount;
-    public string SavePrefabsAt => savePrefabsAt;
 
     protected override void Awake()
     {

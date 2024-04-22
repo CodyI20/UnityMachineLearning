@@ -30,9 +30,5 @@ public class PirateLogic : AgentLogic
         {
             points += _policePoints;
         }
-        else
-        {
-            return;
-        }
     }
 }

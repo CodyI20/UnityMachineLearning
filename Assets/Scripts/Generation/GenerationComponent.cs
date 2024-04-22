@@ -17,6 +17,8 @@ public class GenerationComponent<T> where T : AgentLogic
     public List<T> activeAgents = new List<T>();
     [Space(2)]
     public AgentData lastWinnerData = new AgentData();
+    [Space(2)]
+    public string savePrefabsAt;
     public T lastWinner { get; private set; }
 
 
@@ -35,7 +37,10 @@ public class GenerationComponent<T> where T : AgentLogic
             activeAgents.Add(agent);
             if (parents != null)
             {
+                //Changed the generation of the new agents to be based on the last parent. This should create fast, but not very diverse evolution.
                 var parent = parents[parents.Length-1];
+                //Enable this line to create a random parent for the new agents. This should create a more diverse evolution.
+                //var parent = parents[Random.Range(0, parents.Length)];
                 agent.Birth(parent.GetData());
             }
 
@@ -52,7 +57,8 @@ public class GenerationComponent<T> where T : AgentLogic
         {
             GenerateObjects();
         }
-
+        parentSize += 1;
+        if (parentSize > activeAgents.Count) { parentSize = activeAgents.Count; }
         parents = new T[parentSize];
         for (var i = 0; i < parentSize; i++)
         {
@@ -62,7 +68,7 @@ public class GenerationComponent<T> where T : AgentLogic
         lastWinner = activeAgents[0];
         lastWinner.name += "Gen-" + GenerationManager.Instance.GenerationCount;
         lastWinnerData = lastWinner.GetData();
-        PrefabUtility.SaveAsPrefabAsset(lastWinner.gameObject, GenerationManager.Instance.SavePrefabsAt + lastWinner.name + ".prefab");
+        PrefabUtility.SaveAsPrefabAsset(lastWinner.gameObject, savePrefabsAt + lastWinner.name + ".prefab");
 
         GenerateObjects(parents);
     }
