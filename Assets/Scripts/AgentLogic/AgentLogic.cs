@@ -32,7 +32,7 @@ public abstract class AgentLogic : MonoBehaviour, IComparable
 
     #region Static Variables
 
-    private static readonly float _minimalSteps = 1.0f;
+    private static readonly float _minimalSteps = 5.0f;
     private static readonly float _minimalRayRadius = 10.0f;
     private static readonly float _minimalSight = 2.5f;
     private static readonly float _minimalMovingSpeed = 4.0f;
@@ -69,19 +69,7 @@ public abstract class AgentLogic : MonoBehaviour, IComparable
     /// <param name="parent"></param>
     public void Birth(AgentData parent)
     {
-        settings.steps = parent.steps;
-        settings.rayRadius = parent.rayRadius;
-        settings.sight = parent.sight;
-        settings.movingSpeed = parent.movingSpeed;
-        settings.randomDirectionValue = parent.randomDirectionValue;
-        settings.boxWeight = parent.boxWeight;
-        settings.distanceFactor = parent.distanceFactor;
-        settings.boatWeight = parent.boatWeight;
-        settings.boatDistanceFactor = parent.boatDistanceFactor;
-        settings.enemyWeight = parent.enemyWeight;
-        settings.enemyDistanceFactor = parent.enemyDistanceFactor;
-        settings.policeWeight = parent.policeWeight;
-        settings.policeDistanceFactor = parent.policeDistanceFactor;
+        settings = parent;
     }
 
     /// <summary>
@@ -302,9 +290,6 @@ public abstract class AgentLogic : MonoBehaviour, IComparable
     /// <returns></returns>
     public AgentData GetData()
     {
-        return new AgentData(settings.steps, settings.rayRadius, settings.sight, 
-            settings.movingSpeed, settings.randomDirectionValue, settings.boxWeight, settings.distanceFactor,
-            settings.boatWeight, settings.boatDistanceFactor, settings.enemyWeight, settings.enemyDistanceFactor,
-            settings.policeWeight, settings.policeDistanceFactor, settings.interactableType);
+        return settings;
     }
 }

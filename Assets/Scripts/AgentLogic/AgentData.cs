@@ -7,7 +7,7 @@ using UnityEngine;
 /// Also, it makes it easier to inspect since it is a Serializable struct.
 /// </summary>
 [Serializable]
-public struct AgentData
+public class AgentData
 {
     //What the agent can interact with
     public List<AgentInteractableType> interactableType;
@@ -60,5 +60,9 @@ public struct AgentData
         this.policeWeight = policeWeight;
         this.policeDistanceFactor = policeDistanceFactor;
         this.interactableType = interactableTypes;
+    }
+
+    public AgentData()
+    {
     }
 }
